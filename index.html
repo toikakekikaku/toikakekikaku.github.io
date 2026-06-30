@@ -10,91 +10,109 @@
             src: url('https://irori.github.io/wapuro-mincho/wapuro-mincho.woff2') format('woff2');
         }
         
-        /* 🌌 夜空をイメージした深い紺色の背景 */
+        /* 🌌 深い夜空の背景 */
         body {
             font-family: 'WapuroMincho', serif;
             max-width: 600px;
-            margin: 80px auto;
+            margin: 60px auto;
             padding: 0 20px;
             background-color: #0b132b; 
-            color: #f4f5f6; /* 文字は読みやすい白系 */
+            color: #f4f5f6;
             text-align: center;
             line-height: 1.8;
         }
         
         h1 { 
             font-size: 26px; 
-            margin-bottom: 20px; 
+            margin-bottom: 10px; 
             color: #ffffff;
             letter-spacing: 0.1em;
         }
         
         p { font-size: 16px; margin-bottom: 20px; color: #e0e1dd; }
 
-        /* 🌟 しし座の星を配置する夜空エリア */
+        /* 🌟 しし座を描く夜空のキャンバス */
         .constellation-container {
             position: relative;
-            width: 320px;
-            height: 260px;
-            margin: 50px auto;
+            width: 360px;
+            height: 280px;
+            margin: 40px auto;
             background-color: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* 🗺️ SVGによる星座線（星と星を繋ぐ線） */
+        .constellation-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* 線はクリックの邪魔をしない */
+        }
+        .constellation-lines stroke {
+            stroke: rgba(255, 255, 255, 0.25);
+            stroke-width: 1;
+            stroke-dasharray: 3 3; /* 点線にして繊細な星座感を演出 */
         }
 
         /* 星（リンクボタン）の共通デザイン */
         .star-link {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background-color: #ffffff;
             border-radius: 50%;
             display: block;
             text-decoration: none;
             box-shadow: 0 0 8px #ffffff, 0 0 15px #64dfdf;
             transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 10;
         }
 
-        /* 星にマウスを乗せたときのキラキラ効果 */
+        /* 星にマウスを乗せたときの効果 */
         .star-link:hover {
-            transform: scale(1.4);
+            transform: scale(1.5);
             box-shadow: 0 0 12px #ffb703, 0 0 25px #ffb703;
             background-color: #ffb703;
         }
 
-        /* 星の横に表示される文字（常に見える状態にしています） */
+        /* 星の横に表示される文字 */
         .star-label {
             position: absolute;
-            font-size: 13px;
+            font-size: 12px;
             font-family: 'WapuroMincho', serif;
-            color: #ffffff;
+            color: rgba(255, 255, 255, 0.8);
             white-space: nowrap;
             top: -6px;
-            left: 22px; /* 星の右側に文字が並ぶように調整 */
-            text-decoration: underline; /* リンクだとわかりやすく線をつけています */
+            left: 18px;
+            text-decoration: underline;
         }
-        
         .star-link:hover .star-label {
             color: #ffb703;
+            font-weight: bold;
         }
 
-        /* 📍 しし座の形になるように4つのリンクを厳選配置 */
-        /* 1. 短歌（頭の星・ラサラス付近） */
-        .tanka { top: 40px; left: 80px; }
-        
-        /* 2. カタログ（心臓の主星・レグルス：一番大きく光る） */
-        .catalog { 
-            top: 160px; 
-            left: 60px; 
-            width: 16px; 
-            height: 16px; 
-            box-shadow: 0 0 12px #ffffff, 0 0 20px #ffb703;
-        }
-        
-        /* 3. アーカイブ（背中の星・ゾスマ付近） */
-        .archive { top: 90px; left: 170px; }
-        
-        /* 4. X / Twitter（お尻の星・デネボラ） */
-        .twitter { top: 110px; left: 250px; }
+        /* 📍 しし座の9つの星の正確な配置 (X座標, Y座標) */
+        /* ① ラス・エラセド（頭の先） */
+        .rasalas_head { top: 40px; left: 160px; width: 8px; height: 8px; }
+        /* ② アルテルフ（顔） */
+        .alterf { top: 55px; left: 115px; width: 8px; height: 8px; }
+        /* ③ アダフェラ（首） */
+        .adhafera { top: 95px; left: 130px; }
+        /* ④ アルギエバ（たてがみ） */
+        .algieba { top: 130px; left: 155px; }
+        /* ⑤ レグルス（心臓・主星：大きく光る） */
+        .regulus { top: 210px; left: 175px; width: 15px; height: 15px; box-shadow: 0 0 12px #ffffff, 0 0 20px #ffb703; }
+        /* ⑥ チュート（前足の付け根） */
+        .chertan { top: 230px; left: 240px; }
+        /* ⑦ ゾスマ（背中） */
+        .zosma { top: 145px; left: 275px; }
+        /* ⑧ デネボラ（お尻） */
+        .denebola { top: 165px; left: 330px; }
+        /* ⑨ コル・レオニス（お腹の側） */
+        .subra { top: 245px; left: 130px; width: 8px; height: 8px; }
 
     </style>
 </head>
@@ -103,32 +121,56 @@
     <h1>トイカケ企画</h1>
     <p>夏生まれ獅子座のふたり組ユニット</p>
     
-    <!-- 💡しし座の形をしたリンクエリア -->
+    <!-- 💡しし座の形をしたエリア -->
     <div class="constellation-container">
         
+        <!-- 🗺️ 星同士を繋ぐきれいな星座線（CSSと連動） -->
+        <svg class="constellation-lines">
+            <line x1="164" y1="44" x2="119" y2="59" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2 2" />
+            <line x1="119" y1="59" x2="135" y2="100" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+            <line x1="135" y1="100" x2="160" y2="135" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+            <line x1="160" y1="135" x2="182" y2="217" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+            <line x1="182" y1="217" x2="134" y2="249" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+            <line x1="182" y1="217" x2="245" y2="235" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+            <line x1="245" y1="235" x2="280" y2="150" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+            <line x1="280" y1="150" x2="160" y2="135" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+            <line x1="280" y1="150" x2="335" y2="170" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" />
+        </svg>
+        
+        <!-- 🌟 各星の配置と割り当て -->
+        <!-- リンク先未定の星は href="javascript:void(0)" でクリックしても動かないようにしています -->
+        <a href="javascript:void(0)" class="star-link rasalas_head"><span class="star-label">星A</span></a>
+        <a href="javascript:void(0)" class="star-link alterf"><span class="star-label">星B</span></a>
+        
         <!-- ① 短歌 -->
-        <a href="#" class="star-link tanka" title="短歌">
+        <a href="javascript:void(0)" class="star-link adhafera" title="短歌">
             <span class="star-label">短歌</span>
         </a>
 
-        <!-- ② 文学フリマWebカタログ（主星レグルス） -->
-        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-link catalog" title="文学フリマWebカタログ">
-            <span class="star-label" style="font-weight: bold;">文学フリマWebカタログ</span>
+        <a href="javascript:void(0)" class="star-link algieba"><span class="star-label">星C</span></a>
+
+        <!-- ② 文学フリマWebカタログ（一番輝くレグルス） -->
+        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-link regulus" title="文学フリマWebカタログ">
+            <span class="star-label" style="font-weight: bold; left: 25px;">文学フリマWebカタログ</span>
         </a>
 
+        <a href="javascript:void(0)" class="star-link subra"><span class="star-label">星D</span></a>
+        
         <!-- ③ アーカイブ -->
-        <a href="#" class="star-link archive" title="アーカイブ">
+        <a href="javascript:void(0)" class="star-link chertan" title="アーカイブ">
             <span class="star-label">アーカイブ</span>
         </a>
 
-        <!-- ④ X (Twitter) ※「あなたのユーザー名」の部分をアカウント名に変えてください -->
-        <a href="https://x.com/あなたのユーザー名" target="_blank" class="star-link twitter" title="X (Twitter)">
-            <span class="star-label">X (Twitter)</span>
+        <a href="javascript:void(0)" class="star-link zosma"><span class="star-label">星E</span></a>
+        
+        <!-- ④ X (Twitter) -->
+        <a href="https://x.com/あなたのユーザー名" target="_blank" class="star-link denebola" title="X (Twitter)">
+            <span class="star-label" style="left: -75px;">X (Twitter)</span> <!-- はみ出さないよう文字を左側に -->
         </a>
 
     </div>
 
-    <p style="font-size: 14px; color: #8d99ae; margin-top: 40px;">※星や文字をクリックするとリンク先に飛びます。</p>
+    <p style="font-size: 14px; color: #8d99ae; margin-top: 30px;">※星や文字をクリックすると各ページに移動します。</p>
 
 </body>
 </html>
