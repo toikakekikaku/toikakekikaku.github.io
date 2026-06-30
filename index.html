@@ -55,11 +55,11 @@
             stroke-width: 1px;
         }
 
-        /* ✨ 星の共通デザイン（丸から「微小な星型 ✦」に変更） */
+        /* ✨ 星の共通デザイン（初期状態：45度傾いた極小の星型 ✦） */
         .star-link {
             position: absolute;
-            width: 4px;   /* 👈 さらに小さく4pxに */
-            height: 4px;  /* 👈 さらに小さく4pxに */
+            width: 4px;
+            height: 4px;
             background-color: #333333;
             display: block;
             text-decoration: none;
@@ -67,15 +67,18 @@
             margin-left: -2px;
             z-index: 10;
             
-            /* ✦ 特殊な形のクリップと回転で「傾いたシャープな星型」を作っています */
+            /* ✦ 45度傾いたシャープな星型 */
             clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
-            transform: rotate(45deg); /* 👈 45度回してきらりとさせています */
-            transition: transform 0.2s, background-color 0.2s;
+            transform: rotate(45deg);
+            
+            /* 👈 滑らかに回転・変形させるためのアニメーション設定（0.4秒かけて変化） */
+            transition: transform 0.4s ease, background-color 0.2s ease;
         }
 
-        /* ホバー時に星が少し大きくなって真っ黒になる効果 */
+        /* 🔄 星にマウスを乗せた（タップした）ときの効果 */
         .star-link:hover {
-            transform: rotate(45deg) scale(1.5);
+            /* 👈 45度からぐるっと「225度」まで回転し、少しだけ大きくなります */
+            transform: rotate(225deg) scale(1.5);
             background-color: #000000;
         }
 
@@ -88,15 +91,17 @@
             white-space: nowrap;
             top: 10px;
             left: 50%;
-            /* 星自体は45度回っていますが、文字は回転させずに真っ直ぐ表示します */
+            /* ⚠️ 星リンク全体の回転（hover時含む）の影響を打ち消して、文字は常に真っ直ぐ保ちます */
             transform: translateX(-50%) rotate(-45deg); 
             text-decoration: underline;
             transition: color 0.2s;
         }
         
+        /* 星リンクにホバーしたとき、打ち消す角度を自動調整して文字を真っ直ぐ固定 */
         .star-link:hover .star-label {
             color: #000000;
             font-weight: bold;
+            transform: translateX(-50%) rotate(-225deg);
         }
 
         /* 📍 しし座の正確なピクセル座標 */
@@ -124,7 +129,10 @@
 
         /* ⚠️ 文字の位置微調整 */
         .alpha_regulus .star-label { top: 12px; }
+        
+        /* X (Twitter) のラベル位置固定 */
         .beta_denebola .star-label { top: 12px; left: 15px; transform: rotate(-45deg); }
+        .star-link.beta_denebola:hover .star-label { transform: rotate(-225deg); left: 15px; }
 
     </style>
 </head>
