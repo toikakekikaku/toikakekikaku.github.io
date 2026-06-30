@@ -31,18 +31,18 @@
         
         p { font-size: 16px; margin-bottom: 20px; color: #444444; }
 
-        /* 🌟 しし座を描くエリア（背景の枠と色を完全に消去） */
+        /* 🌟 しし座を描くエリア（枠なし・透明） */
         .constellation-container {
             position: relative;
             width: 100%;
             max-width: 400px;
-            height: 340px;
+            height: 360px; /* 文字を下に常時出すため高さを少し広げました */
             margin: 30px auto;
-            background-color: transparent; /* 👈 背景を透明に */
-            border: none;                  /* 👈 枠線を消去 */
+            background-color: transparent;
+            border: none;
         }
 
-        /* 🗺️ SVGによる星座線 */
+        /* 🗺️ SVGによる星座線（細い直線に変更） */
         .constellation-lines {
             position: absolute;
             top: 0;
@@ -52,12 +52,11 @@
             pointer-events: none;
         }
         .constellation-lines line {
-            stroke: #b1b1b1;       /* 線の色は少し淡いグレーにして上品に */
+            stroke: #cccccc;  /* 👈 上品で細い直線のグレー */
             stroke-width: 1px;
-            stroke-dasharray: 1 3; /* 👈 さらに細かく、サラサラした極小ドットに */
         }
 
-        /* ✨ 星の共通デザイン */
+        /* ✨ 星（リンクボタン）の共通デザイン */
         .star-link {
             position: absolute;
             width: 6px;
@@ -66,40 +65,32 @@
             border-radius: 50%;
             display: block;
             text-decoration: none;
-            /* ズレ防止：星の中心（3px分）を基準点にする設定 */
             margin-top: -3px;
             margin-left: -3px;
-            transition: transform 0.2s, background-color 0.2s;
             z-index: 10;
         }
 
-        /* 星にマウスを乗せた（タップした）ときの効果 */
-        .star-link:hover {
-            transform: scale(1.6);
-            background-color: #000000;
-        }
-
-        /* 🏷️ 星のラベル */
+        /* 🏷️ 星の下のラベル（常に表示、ワープロ明朝） */
         .star-label {
             position: absolute;
             font-size: 11px;
             font-family: 'WapuroMincho', serif;
-            color: #ffffff;
+            color: #555555;
             white-space: nowrap;
-            top: -26px;
+            top: 10px; /* 👈 星のすこし下に配置 */
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.85);
-            padding: 2px 6px;
-            border-radius: 4px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s, visibility 0.2s;
+            text-decoration: underline; /* リンクと分かりやすいように下線 */
+            transition: color 0.2s;
         }
         
+        /* 星や文字にマウスが乗ったとき、少し濃くなる効果 */
+        .star-link:hover {
+            background-color: #000000;
+        }
         .star-link:hover .star-label {
-            opacity: 1;
-            visibility: visible;
+            color: #000000;
+            font-weight: bold;
         }
 
         /* 📍 しし座の星の正確な中心座標（％指定） */
@@ -109,12 +100,16 @@
         .zeta_adhafera { top: 24%; left: 61%; }
         .gamma_algieba { top: 34%; left: 61%; }
         .eta_neck      { top: 42%; left: 68%; }
-        /* レグルスだけサイズが違う（9px）のでズレ補正を上書き */
+        /* レグルス（主星：ここだけ9px） */
         .alpha_regulus { top: 54%; left: 68%; width: 9px; height: 9px; margin-top: -4.5px; margin-left: -4.5px; } 
         .rho_frontfoot { top: 61%; left: 56%; }
         .theta_chertan { top: 45%; left: 28%; }
         .delta_zosma   { top: 31%; left: 28%; }
         .beta_denebola { top: 45%; left: 7%;  }
+
+        /* ⚠️ カタログとXは文字が長いため、重なりを防ぐ位置微調整 */
+        .alpha_regulus .star-label { top: 12px; }
+        .beta_denebola .star-label { top: 10px; left: 0%; transform: translateX(0); } /* 左端で見切れないよう調整 */
 
     </style>
 </head>
@@ -122,56 +117,3 @@
 
     <h1>トイカケ企画</h1>
     <p>夏生まれ獅子座のふたり組ユニット</p>
-    
-    <div class="constellation-container">
-        
-        <svg class="constellation-lines" viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%;">
-            <line x1="88" y1="24" x2="79" y2="23" />
-            <line x1="79" y1="23" x2="74" y2="16" />
-            <line x1="74" y1="16" x2="61" y2="24" />
-            <line x1="61" y1="24" x2="61" y2="34" />
-            <line x1="61" y1="34" x2="68" y2="42" />
-            <line x1="68" y1="42" x2="68" y2="54" />
-            
-            <line x1="68" y1="54" x2="56" y2="61" />
-            <line x1="56" y1="61" x2="28" y2="45" />
-
-            <line x1="61" y1="34" x2="28" y2="31" />
-            <line x1="28" y1="31" x2="28" y2="45" />
-            <line x1="28" y1="31" x2="7"  y2="45" />
-            <line x1="28" y1="45" x2="7"  y2="45" />
-        </svg>
-        
-        <a href="javascript:void(0)" class="star-link lambda_nose"><span class="star-label">星A</span></a>
-        <a href="javascript:void(0)" class="star-link epsilon_eye"><span class="star-label">星B</span></a>
-        <a href="javascript:void(0)" class="star-link mu_head"><span class="star-label">星C</span></a>
-        
-        <a href="javascript:void(0)" class="star-link zeta_adhafera" title="短歌">
-            <span class="star-label">短歌</span>
-        </a>
-
-        <a href="javascript:void(0)" class="star-link gamma_algieba"><span class="star-label">星D</span></a>
-        <a href="javascript:void(0)" class="star-link eta_neck"><span class="star-label">星E</span></a>
-
-        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-link alpha_regulus" title="文学フリマWebカタログ">
-            <span class="star-label" style="font-weight: bold;">文学フリマWebカタログ</span>
-        </a>
-
-        <a href="javascript:void(0)" class="star-link rho_frontfoot"><span class="star-label">星F</span></a>
-        
-        <a href="javascript:void(0)" class="star-link theta_chertan" title="アーカイブ">
-            <span class="star-label">アーカイブ</span>
-        </a>
-
-        <a href="javascript:void(0)" class="star-link delta_zosma"><span class="star-label">星G</span></a>
-        
-        <a href="https://x.com/あなたのユーザー名" target="_blank" class="star-link beta_denebola" title="X (Twitter)">
-            <span class="star-label">X (Twitter)</span>
-        </a>
-
-    </div>
-
-    <p style="font-size: 13px; color: #888888; margin-top: 20px;">※星に触れるとリンク名が浮かび上がります。</p>
-
-</body>
-</html>
