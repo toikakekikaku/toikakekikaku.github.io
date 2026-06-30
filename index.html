@@ -35,7 +35,7 @@
         .constellation-container {
             position: relative;
             width: 360px;
-            height: 380px; /* 文字が下に入るので高さを少し広げました */
+            height: 380px; 
             margin: 30px auto;
             background-color: transparent;
             border: none;
@@ -60,51 +60,52 @@
             position: absolute;
             display: flex;
             flex-direction: column;
-            align-items: center; /* 👈 これで星と文字が完全に中央（真下）で揃います */
+            align-items: center; 
             text-decoration: none;
             z-index: 10;
-            /* 星の中心が座標にぴったり合うように位置を補正 */
             transform: translate(-50%, -2px); 
         }
 
-        /* ✨ 星の形（✦） */
+        /* ✨ 星の形（✦）初期状態は少し優しいグレー */
         .star-shape {
             width: 4px;
             height: 4px;
-            background-color: #333333;
+            background-color: #666666; /* 👈 初期状態の星の色 */
             clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
             transform: rotate(45deg);
-            transition: transform 0.4s ease, background-color 0.2s ease;
+            /* 👈 色（background-color）と回転（transform）の両方を0.4秒かけて滑らかに変えます */
+            transition: transform 0.4s ease, background-color 0.4s ease;
         }
 
-        /* 🔄 マウスを乗せたときに星型だけが回る演出 */
+        /* 🔄 カーソルを合わせたとき：星の色が真っ黒に変わって、225度まで回転する */
         .star-box:hover .star-shape {
-            transform: rotate(225deg) scale(1.5);
-            background-color: #000000;
+            background-color: #000000; /* 👈 カーソルが乗ったときの星の色 */
+            transform: rotate(225deg) scale(1.5); /* 👈 回転して少し大きくなる */
         }
 
-        /* 🏷️ 星の真下のラベル（常時表示、ワープロ明朝） */
+        /* 🏷️ 星の真下のラベル（カーソルを合わせなくても最初からずっと表示） */
         .star-label {
             font-size: 11px;
             font-family: 'WapuroMincho', serif;
             color: #555555;
             white-space: nowrap;
-            margin-top: 6px; /* 👈 星のすぐ下に隙間をあける */
+            margin-top: 6px; 
             text-decoration: underline;
             transition: color 0.2s;
         }
         
+        /* カーソルを合わせたときは文字の色も真っ黒に */
         .star-box:hover .star-label {
             color: #000000;
             font-weight: bold;
         }
 
-        /* 📍 形を整えるためだけの名前なしの星 */
+        /* 📍 形を整えるためだけの名前なしの星（薄いグレーで固定） */
         .star-dot {
             position: absolute;
             width: 4px;
             height: 4px;
-            background-color: #bbbbbb;
+            background-color: #d1d1d1;
             z-index: 5;
             clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
             transform: translate(-50%, -50%) rotate(45deg);
@@ -112,21 +113,22 @@
 
         /* 📍 しし座の正確なピクセル座標 */
         .lambda_nose   { top: 86px;  left: 316px; } /* お知らせ */
-        .epsilon_eye   { top: 82px;  left: 284px; } /* 星のみ */
+        .epsilon_eye   { top: 82px;  left: 284px; } 
         .mu_head       { top: 57px;  left: 266px; } /* Bluesky */
         .zeta_adhafera { top: 86px;  left: 219px; } /* 短歌 */
-        .gamma_algieba { top: 122px; left: 219px; } /* 星のみ */
-        .eta_neck      { top: 151px; left: 244px; } /* 星のみ */
+        .gamma_algieba { top: 122px; left: 219px; } 
+        .eta_neck      { top: 151px; left: 244px; } 
         
-        /* 文学フリマ福岡（主星：ここだけ少し大きめの星型 7px） */
+        /* 文学フリマ福岡（ここだけ星の初期サイズを少し大きめの7pxに） */
         .alpha_regulus { top: 194px; left: 244px; } 
-        .alpha_regulus .star-shape { width: 7px; height: 7px; }
+        .alpha_regulus .star-shape { width: 7px; height: 7px; background-color: #444444; }
+        .alpha_regulus:hover .star-shape { background-color: #000000; }
         
-        .rho_frontfoot { top: 219px; left: 201px; } /* 星のみ */
+        .rho_frontfoot { top: 219px; left: 201px; } 
         .theta_chertan { top: 162px; left: 100px; } /* アーカイブ */
-        .delta_zosma   { top: 111px; left: 100px; } /* 星のみ */
+        .delta_zosma   { top: 111px; left: 100px; } 
         
-        /* フォーム（端で見切れないように少しだけ右に文字をずらす個別設定） */
+        /* フォーム（端で見切れないように文字位置を微調整） */
         .beta_denebola { top: 162px; left: 25px; } 
         .beta_denebola .star-label { margin-left: 15px; } 
 
@@ -186,7 +188,13 @@
             <span class="star-label">フォーム</span>
         </a>
 
-        <div class="star-dot" style="top: 82px; left: 284px;"></div>  <div class="star-dot" style="top: 122px; left: 219px;"></div> <div class="star-dot" style="top: 151px; left: 244px;"></div> <div class="star-dot" style="top: 219px; left: 201px;"></div> <div class="star-dot" style="top: 111px; left: 100px;"></div> </div>
+        <div class="star-dot" style="top: 82px; left: 284px;"></div>  
+        <div class="star-dot" style="top: 122px; left: 219px;"></div> 
+        <div class="star-dot" style="top: 151px; left: 244px;"></div> 
+        <div class="star-dot" style="top: 219px; left: 201px;"></div> 
+        <div class="star-dot" style="top: 111px; left: 100px;"></div> 
+
+    </div>
 
     <p style="font-size: 13px; color: #888888; margin-top: 20px;">※星や文字をクリックするとリンク先にジャンプします。</p>
 
