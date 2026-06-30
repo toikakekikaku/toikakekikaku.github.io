@@ -35,8 +35,8 @@
         .constellation-container {
             position: relative;
             width: 360px;
-            height: 380px; 
-            margin: 30px auto;
+            height: 340px; 
+            margin: 40px auto;
             background-color: transparent;
             border: none;
         }
@@ -55,7 +55,7 @@
             stroke-width: 1px;
         }
 
-        /* 📦 星と文字をセットにするブロック（真下に並べるための設定） */
+        /* 📦 星と文字をセットにするブロック */
         .star-box {
             position: absolute;
             display: flex;
@@ -109,22 +109,22 @@
             transform: translate(-50%, -50%) rotate(45deg);
         }
 
-        /* 📍 修正後のしし座ピクセル座標 */
-        .lambda_nose   { top: 86px;  left: 316px; } /* お知らせ */
-        .epsilon_eye   { top: 82px;  left: 284px; } /* 名前なし（頭） */
-        .mu_head       { top: 57px;  left: 266px; } /* Bluesky */
-        .zeta_adhafera { top: 86px;  left: 219px; } /* 短歌 */
+        /* 📍 星座図から算出したリアルな位置座標 */
+        .lambda_nose   { top: 100px; left: 325px; } /* お知らせ（λ） */
+        .epsilon_eye   { top: 96px;  left: 285px; } /* 名前なし（ε） */
+        .mu_head       { top: 60px;  left: 260px; } /* Bluesky（μ） */
+        .zeta_adhafera { top: 96px;  left: 205px; } /* 短歌（ζ） */
         
-        /* 文学フリマ福岡（底辺の右端：少し大きめの星型 7px） */
-        .alpha_regulus { top: 194px; left: 244px; } 
+        /* 文学フリマ福岡（α:レグルス）高さを大幅に上げて底辺ラインを綺麗に */
+        .alpha_regulus { top: 205px; left: 235px; } 
         .alpha_regulus .star-shape { width: 7px; height: 7px; background-color: #444444; }
         .alpha_regulus:hover .star-shape { background-color: #000000; }
         
-        .theta_chertan { top: 162px; left: 130px; } /* アーカイブ（底辺の中央：位置を少し右寄りに調整） */
-        .delta_zosma   { top: 111px; left: 130px; } /* 名前なし（背中：アーカイブの真上） */
+        .theta_chertan { top: 180px; left: 110px; } /* アーカイブ（θ） */
+        .delta_zosma   { top: 125px; left: 115px; } /* 名前なし（δ） */
         
-        .beta_denebola { top: 162px; left: 25px;  } /* フォーム（底辺の左端） */
-        .beta_denebola .star-label { margin-left: 15px; } 
+        .beta_denebola { top: 185px; left: 25px;  } /* フォーム（β） */
+        .beta_denebola .star-label { margin-left: 10px; } 
 
         /* 📊 カウンター専用のスタイル */
         .counter-area {
@@ -135,7 +135,7 @@
         }
         .counter-area span {
             margin: 0 8px;
-            font-family: monospace; /* 数字を等幅にして見やすく */
+            font-family: monospace;
         }
 
     </style>
@@ -143,12 +143,12 @@
 <body>
 
     <h1>トイカケ企画</h1>
-    <p>夏生まれ獅子座のふたり組ユニット</p>
+    <p>夏生まれ獅子座 of ふたり組ユニット</p>
     
     <div class="constellation-container">
         
-        <svg class="constellation-lines" width="360" height="360">
-            <line x1="316" y1="86"  x2="284" y2="82" /> <line x1="284" y1="82"  x2="266" y2="57" /> <line x1="266" y1="57"  x2="219" y2="86" /> <line x1="219" y1="86"  x2="244" y2="194" /> <line x1="244" y1="194" x2="130" y2="162" /> <line x1="130" y1="162" x2="25"  y2="162" /> <line x1="219" y1="86"  x2="130" y2="111" /> <line x1="130" y1="111" x2="130" y2="162" /> <line x1="130" y1="111" x2="25"  y2="162" /> </svg>
+        <svg class="constellation-lines" width="360" height="340">
+            <line x1="325" y1="100" x2="285" y2="96" />  <line x1="285" y1="96"  x2="260" y2="60" />  <line x1="260" y1="60"  x2="205" y2="96" />  <line x1="205" y1="96"  x2="235" y2="205" /> <line x1="235" y1="205" x2="110" y2="180" /> <line x1="110" y1="180" x2="25"  y2="185" /> <line x1="205" y1="96"  x2="115" y2="125" /> <line x1="115" y1="125" x2="110" y2="180" /> <line x1="115" y1="125" x2="25"  y2="185" /> </svg>
         
         <a href="javascript:void(0)" class="star-box lambda_nose">
             <div class="star-shape"></div>
@@ -180,7 +180,7 @@
             <span class="star-label">フォーム</span>
         </a>
 
-        <div class="star-dot" style="top: 82px; left: 284px;"></div>  <div class="star-dot" style="top: 111px; left: 130px;"></div> </div>
+        <div class="star-dot" style="top: 96px; left: 285px;"></div>  <div class="star-dot" style="top: 125px; left: 115px;"></div> </div>
 
     <div class="counter-area">
         今日:<span id="count-today">0</span>
@@ -193,47 +193,31 @@
             const now = new Date();
             const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
             
-            // ローカルストレージからデータを取得
             let lastDate = localStorage.getItem('counter_last_date');
             let todayCount = parseInt(localStorage.getItem('counter_today') || '0', 10);
             let yesterCount = parseInt(localStorage.getItem('counter_yesterday') || '0', 10);
             let totalCount = parseInt(localStorage.getItem('counter_total') || '0', 10);
 
-            // 初回訪問時などの初期化
             if (!lastDate) {
-                todayCount = 1;
-                yesterCount = 0;
-                totalCount = 1;
+                todayCount = 1; yesterCount = 0; totalCount = 1;
                 localStorage.setItem('counter_last_date', todayStr);
             } else if (lastDate !== todayStr) {
-                // 日付が変わった場合の処理
-                // 前日が本当に昨日（1日前）かどうかチェック
                 const lastParts = lastDate.split('-').map(Number);
                 const lastDateObj = new Date(lastParts[0], lastParts[1] - 1, lastParts[2]);
                 const diffTime = Math.abs(now - lastDateObj);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-                if (diffDays === 1) {
-                    yesterCount = todayCount; // 昨日のカウントにスライド
-                } else {
-                    yesterCount = 0; // 2日以上空いていた場合は昨日は0
-                }
-                
-                todayCount = 1; // 本日は1からスタート
-                totalCount += 1;
+                if (diffDays === 1) { yesterCount = todayCount; } else { yesterCount = 0; }
+                todayCount = 1; totalCount += 1;
                 localStorage.setItem('counter_last_date', todayStr);
             } else {
-                // 同一日のアクセス
-                todayCount += 1;
-                totalCount += 1;
+                todayCount += 1; totalCount += 1;
             }
 
-            // データを保存
             localStorage.setItem('counter_today', todayCount);
             localStorage.setItem('counter_yesterday', yesterCount);
             localStorage.setItem('counter_total', totalCount);
 
-            // 画面に数値を反映
             document.getElementById('count-today').textContent = todayCount;
             document.getElementById('count-yesterday').textContent = yesterCount;
             document.getElementById('count-total').textContent = totalCount;
