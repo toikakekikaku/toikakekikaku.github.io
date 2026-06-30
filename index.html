@@ -10,14 +10,14 @@
             src: url('https://irori.github.io/wapuro-mincho/wapuro-mincho.woff2') format('woff2');
         }
         
-        /* 🌌 深い夜空の背景 */
+        /* ⚪ 白黒ベースのシンプルな背景と文字 */
         body {
             font-family: 'WapuroMincho', serif;
             max-width: 600px;
             margin: 50px auto;
             padding: 0 20px;
-            background-color: #0b132b; 
-            color: #f4f5f6;
+            background-color: #ffffff; /* 背景は白 */
+            color: #333333;            /* 文字は暗いグレー */
             text-align: center;
             line-height: 1.8;
         }
@@ -25,24 +25,25 @@
         h1 { 
             font-size: 26px; 
             margin-bottom: 10px; 
-            color: #ffffff;
+            color: #111111;
             letter-spacing: 0.1em;
         }
         
-        p { font-size: 16px; margin-bottom: 20px; color: #e0e1dd; }
+        p { font-size: 16px; margin-bottom: 20px; color: #444444; }
 
         /* 🌟 しし座を描くエリア */
         .constellation-container {
             position: relative;
             width: 100%;
             max-width: 400px;
-            height: 320px;
+            height: 340px;
             margin: 30px auto;
-            background-color: rgba(255, 255, 255, 0.02);
+            background-color: #fafafa; /* ほんのり明るいグレーのボックス */
+            border: 1px solid #eeeeee;
             border-radius: 12px;
         }
 
-        /* 🗺️ SVGによる星座線（細かく可愛い点線に修正） */
+        /* 🗺️ SVGによる星座線（細かく繊細な黒い点線） */
         .constellation-lines {
             position: absolute;
             top: 0;
@@ -52,46 +53,44 @@
             pointer-events: none;
         }
         .constellation-lines line {
-            stroke: rgba(255, 255, 255, 0.3);
-            stroke-width: 1;
-            stroke-dasharray: 1 2; /* 👈 ここを細かくして、ドット絵のような可愛い点線にしました */
+            stroke: #999999;       /* 線の色はグレー */
+            stroke-width: 1px;
+            stroke-dasharray: 1 2; /* 細かいドットの点線 */
         }
 
-        /* ✨ 星の共通デザイン */
+        /* ✨ 星の共通デザイン（サイズは小さめ） */
         .star-link {
             position: absolute;
             width: 6px;
             height: 6px;
-            background-color: #ffffff;
+            background-color: #333333; /* 星の色は黒（暗いグレー） */
             border-radius: 50%;
             display: block;
             text-decoration: none;
-            box-shadow: 0 0 6px #ffffff, 0 0 10px #64dfdf;
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.2s;
             z-index: 10;
         }
 
-        /* 星にマウスを乗せたときの効果 */
+        /* 星にマウスを乗せた（タップした）ときの効果 */
         .star-link:hover {
             transform: scale(1.6);
-            box-shadow: 0 0 10px #ffb703, 0 0 20px #ffb703;
-            background-color: #ffb703;
+            background-color: #000000; /* ホバーで真っ黒に */
         }
 
-        /* 🏷️ 星のラベル（ワープロ明朝を強制統一） */
+        /* 🏷️ 星のラベル（ホバー時に綺麗に浮かび上がるワープロ明朝） */
         .star-label {
             position: absolute;
             font-size: 11px;
-            font-family: 'WapuroMincho', 'MS Mincho', serif; /* 👈 フォントをワープロ明朝に統一 */
-            color: #ffb703;
+            font-family: 'WapuroMincho', serif;
+            color: #ffffff;
             white-space: nowrap;
-            top: -25px;
+            top: -26px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(11, 19, 43, 0.9);
+            background-color: rgba(0, 0, 0, 0.85); /* ラベルの背景は黒 */
             padding: 2px 6px;
             border-radius: 4px;
-            border: 1px solid rgba(255, 183, 3, 0.3);
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.2s, visibility 0.2s;
@@ -102,17 +101,19 @@
             visibility: visible;
         }
 
-        /* 📍 しし座の9つの星の配置 */
-        .rasalas_head { top: 12%; left: 45%; } /* 頭先 */
-        .alterf       { top: 20%; left: 32%; } /* 顔 */
-        .adhafera     { top: 32%; left: 36%; } /* 短歌 */
-        .algieba      { top: 42%; left: 45%; } /* 星C */
-        /* レグルス（主星：10px） */
-        .regulus      { top: 68%; left: 50%; width: 10px; height: 10px; box-shadow: 0 0 10px #ffffff, 0 0 18px #ffb703; } 
-        .subra        { top: 80%; left: 36%; } /* 星D */
-        .chertan      { top: 74%; left: 70%; } /* アーカイブ */
-        .zosma        { top: 48%; left: 80%; } /* 星E */
-        .denebola     { top: 55%; left: 92%; } /* X */
+        /* 📍 画像を基に割り出したしし座の正確な星配置（％指定） */
+        .lambda_nose   { top: 24%; left: 88%; } /* 鼻先 λ */
+        .mu_head       { top: 16%; left: 74%; } /* 頭 μ */
+        .epsilon_eye   { top: 23%; left: 79%; } /* 目 ε */
+        .zeta_adhafera { top: 24%; left: 61%; } /* 短歌（アダフェラ ζ） */
+        .gamma_algieba { top: 34%; left: 61%; } /* 星C（アルギエバ γ） */
+        .eta_neck      { top: 42%; left: 68%; } /* たてがみ η */
+        /* レグルス（一番輝く主星：ここだけ少し大きめの9px） */
+        .alpha_regulus { top: 54%; left: 68%; width: 9px; height: 9px; } 
+        .rho_frontfoot { top: 61%; left: 56%; } /* 前足 ρ */
+        .theta_chertan { top: 45%; left: 28%; } /* アーカイブ（シェルタン θ） */
+        .delta_zosma   { top: 31%; left: 28%; } /* 星E（ゾスマ δ） */
+        .beta_denebola { top: 45%; left: 7%;  } /* X（デネボラ β） */
 
     </style>
 </head>
@@ -124,37 +125,38 @@
     <div class="constellation-container">
         
         <svg class="constellation-lines" viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%;">
-            <line x1="45" y1="12" x2="32" y2="20" />
-            <line x1="32" y1="20" x2="36" y2="32" /> <line x1="36" y1="32" x2="45" y2="42" /> <line x1="45" y1="42" x2="50" y2="68" /> <line x1="50" y1="68" x2="36" y2="80" /> <line x1="50" y1="68" x2="70" y2="74" /> <line x1="70" y1="74" x2="80" y2="48" /> <line x1="80" y1="48" x2="45" y2="42" /> <line x1="80" y1="48" x2="92" y2="55" /> </svg>
+            <line x1="88" y1="24" x2="79" y2="23" /> <line x1="79" y1="23" x2="74" y2="16" /> <line x1="74" y1="16" x2="61" y2="24" /> <line x1="61" y1="24" x2="61" y2="34" /> <line x1="61" y1="34" x2="68" y2="42" /> <line x1="68" y1="42" x2="68" y2="54" /> <line x1="68" y1="54" x2="56" y2="61" /> <line x1="56" y1="61" x2="28" y2="45" /> <line x1="61" y1="34" x2="28" y2="31" /> <line x1="28" y1="31" x2="28" y2="45" /> <line x1="28" y1="31" x2="7"  y2="45" /> <line x1="28" y1="45" x2="7"  y2="45" /> </svg>
         
-        <a href="javascript:void(0)" class="star-link rasalas_head"><span class="star-label">星A</span></a>
-        <a href="javascript:void(0)" class="star-link alterf"><span class="star-label">星B</span></a>
+        <a href="javascript:void(0)" class="star-link lambda_nose"><span class="star-label">星A</span></a>
+        <a href="javascript:void(0)" class="star-link epsilon_eye"><span class="star-label">星B</span></a>
+        <a href="javascript:void(0)" class="star-link mu_head"><span class="star-label">星C</span></a>
         
-        <a href="javascript:void(0)" class="star-link adhafera" title="短歌">
+        <a href="javascript:void(0)" class="star-link zeta_adhafera" title="短歌">
             <span class="star-label">短歌</span>
         </a>
 
-        <a href="javascript:void(0)" class="star-link algieba"><span class="star-label">星C</span></a>
+        <a href="javascript:void(0)" class="star-link gamma_algieba"><span class="star-label">星D</span></a>
+        <a href="javascript:void(0)" class="star-link eta_neck"><span class="star-label">星E</span></a>
 
-        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-link regulus" title="文学フリマWebカタログ">
+        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-link alpha_regulus" title="文学フリマWebカタログ">
             <span class="star-label" style="font-weight: bold;">文学フリマWebカタログ</span>
         </a>
 
-        <a href="javascript:void(0)" class="star-link subra"><span class="star-label">星D</span></a>
+        <a href="javascript:void(0)" class="star-link rho_frontfoot"><span class="star-label">星F</span></a>
         
-        <a href="javascript:void(0)" class="star-link chertan" title="アーカイブ">
+        <a href="javascript:void(0)" class="star-link theta_chertan" title="アーカイブ">
             <span class="star-label">アーカイブ</span>
         </a>
 
-        <a href="javascript:void(0)" class="star-link zosma"><span class="star-label">星E</span></a>
+        <a href="javascript:void(0)" class="star-link delta_zosma"><span class="star-label">星G</span></a>
         
-        <a href="https://x.com/あなたのユーザー名" target="_blank" class="star-link denebola" title="X (Twitter)">
+        <a href="https://x.com/あなたのユーザー名" target="_blank" class="star-link beta_denebola" title="X (Twitter)">
             <span class="star-label">X (Twitter)</span>
         </a>
 
     </div>
 
-    <p style="font-size: 13px; color: #8d99ae; margin-top: 20px;">※星に触れるとリンク名が浮かび上がります。</p>
+    <p style="font-size: 13px; color: #666666; margin-top: 20px;">※星に触れるとリンク名が浮かび上がります。</p>
 
 </body>
 </html>
