@@ -31,11 +31,11 @@
         
         p { font-size: 16px; margin-bottom: 20px; color: #444444; }
 
-        /* 🌟 しし座を描くエリア（高さを確実に固定して真っ白を防止） */
+        /* 🌟 しし座を描くエリア */
         .constellation-container {
             position: relative;
-            width: 360px;  /* 横幅を固定 */
-            height: 360px; /* 高さを固定 */
+            width: 360px;
+            height: 360px;
             margin: 30px auto;
             background-color: transparent;
             border: none;
@@ -55,18 +55,28 @@
             stroke-width: 1px;
         }
 
-        /* ✨ 星（リンクボタン）の共通デザイン */
+        /* ✨ 星の共通デザイン（丸から「微小な星型 ✦」に変更） */
         .star-link {
             position: absolute;
-            width: 6px;
-            height: 6px;
+            width: 4px;   /* 👈 さらに小さく4pxに */
+            height: 4px;  /* 👈 さらに小さく4pxに */
             background-color: #333333;
-            border-radius: 50%;
             display: block;
             text-decoration: none;
-            margin-top: -3px;
-            margin-left: -3px;
+            margin-top: -2px;
+            margin-left: -2px;
             z-index: 10;
+            
+            /* ✦ 特殊な形のクリップと回転で「傾いたシャープな星型」を作っています */
+            clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+            transform: rotate(45deg); /* 👈 45度回してきらりとさせています */
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        /* ホバー時に星が少し大きくなって真っ黒になる効果 */
+        .star-link:hover {
+            transform: rotate(45deg) scale(1.5);
+            background-color: #000000;
         }
 
         /* 🏷️ 星の下のラベル（常に表示、ワープロ明朝） */
@@ -76,39 +86,45 @@
             font-family: 'WapuroMincho', serif;
             color: #555555;
             white-space: nowrap;
-            top: 10px; /* 星の10px下に表示 */
+            top: 10px;
             left: 50%;
-            transform: translateX(-50%);
+            /* 星自体は45度回っていますが、文字は回転させずに真っ直ぐ表示します */
+            transform: translateX(-50%) rotate(-45deg); 
             text-decoration: underline;
             transition: color 0.2s;
         }
         
-        /* ホバー効果 */
-        .star-link:hover {
-            background-color: #000000;
-        }
         .star-link:hover .star-label {
             color: #000000;
             font-weight: bold;
         }
 
-        /* 📍 しし座の正確なピクセル座標（画像から完全固定値で算出） */
-        .lambda_nose   { top: 86px;  left: 316px; }
-        .epsilon_eye   { top: 82px;  left: 284px; }
-        .mu_head       { top: 57px;  left: 266px; }
-        .zeta_adhafera { top: 86px;  left: 219px; }
-        .gamma_algieba { top: 122px; left: 219px; }
-        .eta_neck      { top: 151px; left: 244px; }
-        /* レグルス（ここだけ9pxサイズ用に中心ズレ補正） */
-        .alpha_regulus { top: 194px; left: 244px; width: 9px; height: 9px; margin-top: -4.5px; margin-left: -4.5px; } 
-        .rho_frontfoot { top: 219px; left: 201px; }
-        .theta_chertan { top: 162px; left: 100px; }
-        .delta_zosma   { top: 111px; left: 100px; }
-        .beta_denebola { top: 162px; left: 25px;  }
+        /* 📍 しし座の正確なピクセル座標 */
+        .lambda_nose   { top: 86px;  left: 316px; } /* お知らせ */
+        .epsilon_eye   { top: 82px;  left: 284px; } /* 星B */
+        .mu_head       { top: 57px;  left: 266px; } /* Bluesky */
+        .zeta_adhafera { top: 86px;  left: 219px; } /* 短歌 */
+        .gamma_algieba { top: 122px; left: 219px; } /* 星D */
+        .eta_neck      { top: 151px; left: 244px; } /* 星E */
+        
+        /* レグルス（主星：ここだけ少し大きめの星型 7px） */
+        .alpha_regulus { 
+            top: 194px; 
+            left: 244px; 
+            width: 7px; 
+            height: 7px; 
+            margin-top: -3.5px; 
+            margin-left: -3.5px; 
+        } 
+        
+        .rho_frontfoot { top: 219px; left: 201px; } /* 星F */
+        .theta_chertan { top: 162px; left: 100px; } /* アーカイブ */
+        .delta_zosma   { top: 111px; left: 100px; } /* 星G */
+        .beta_denebola { top: 162px; left: 25px;  } /* X */
 
-        /* ⚠️ 文字が長くて重なりそうな部分の位置微調整 */
+        /* ⚠️ 文字の位置微調整 */
         .alpha_regulus .star-label { top: 12px; }
-        .beta_denebola .star-label { top: 12px; left: 15px; transform: none; } /* カタログ名が左に見切れないように */
+        .beta_denebola .star-label { top: 12px; left: 15px; transform: rotate(-45deg); }
 
     </style>
 </head>
@@ -136,14 +152,10 @@
             <line x1="100" y1="162" x2="25"  y2="162" />
         </svg>
         
-        <a href="javascript:void(0)" class="star-link lambda_nose"><span class="star-label">星A</span></a>
+        <a href="javascript:void(0)" class="star-link lambda_nose" title="お知らせ"><span class="star-label">お知らせ</span></a>
         <a href="javascript:void(0)" class="star-link epsilon_eye"><span class="star-label">星B</span></a>
-        <a href="javascript:void(0)" class="star-link mu_head"><span class="star-label">星C</span></a>
-        
-        <a href="javascript:void(0)" class="star-link zeta_adhafera" title="短歌">
-            <span class="star-label">短歌</span>
-        </a>
-
+        <a href="javascript:void(0)" class="star-link mu_head" title="Bluesky"><span class="star-label">Bluesky</span></a>
+        <a href="javascript:void(0)" class="star-link zeta_adhafera" title="短歌"><span class="star-label">短歌</span></a>
         <a href="javascript:void(0)" class="star-link gamma_algieba"><span class="star-label">星D</span></a>
         <a href="javascript:void(0)" class="star-link eta_neck"><span class="star-label">星E</span></a>
 
@@ -151,4 +163,17 @@
             <span class="star-label" style="font-weight: bold;">文学フリマWebカタログ</span>
         </a>
 
-        <a href="javascript:void(0)" class="star-link rho_frontfoot"><span class="
+        <a href="javascript:void(0)" class="star-link rho_frontfoot"><span class="star-label">星F</span></a>
+        <a href="javascript:void(0)" class="star-link theta_chertan" title="アーカイブ"><span class="star-label">アーカイブ</span></a>
+        <a href="javascript:void(0)" class="star-link delta_zosma"><span class="star-label">星G</span></a>
+        
+        <a href="https://x.com/あなたのユーザー名" target="_blank" class="star-link beta_denebola" title="X (Twitter)">
+            <span class="star-label">X (Twitter)</span>
+        </a>
+
+    </div>
+
+    <p style="font-size: 13px; color: #888888; margin-top: 20px;">※星や文字をクリックするとリンク先にジャンプします。</p>
+
+</body>
+</html>
