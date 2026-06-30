@@ -9,35 +9,126 @@
             font-family: 'WapuroMincho';
             src: url('https://irori.github.io/wapuro-mincho/wapuro-mincho.woff2') format('woff2');
         }
+        
+        /* 🌌 夜空をイメージした深い紺色の背景 */
         body {
             font-family: 'WapuroMincho', serif;
             max-width: 600px;
             margin: 80px auto;
             padding: 0 20px;
-            background-color: #ffffff;
-            color: #333333;
+            background-color: #0b132b; 
+            color: #f4f5f6; /* 文字は読みやすい白系 */
             text-align: center;
             line-height: 1.8;
         }
-        h1 { font-size: 24px; margin-bottom: 30px; }
-        p { font-size: 16px; margin-bottom: 20px; }
-        .links { margin-top: 40px; }
-        a { color: #333333; text-decoration: underline; margin: 0 10px; }
-        a:hover { color: #888888; }
+        
+        h1 { 
+            font-size: 26px; 
+            margin-bottom: 20px; 
+            color: #ffffff;
+            letter-spacing: 0.1em;
+        }
+        
+        p { font-size: 16px; margin-bottom: 20px; color: #e0e1dd; }
+
+        /* 🌟 しし座の星を配置する夜空エリア */
+        .constellation-container {
+            position: relative;
+            width: 320px;
+            height: 260px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+        }
+
+        /* 星（リンクボタン）の共通デザイン */
+        .star-link {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: block;
+            text-decoration: none;
+            box-shadow: 0 0 8px #ffffff, 0 0 15px #64dfdf;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 星にマウスを乗せたときのキラキラ効果 */
+        .star-link:hover {
+            transform: scale(1.4);
+            box-shadow: 0 0 12px #ffb703, 0 0 25px #ffb703;
+            background-color: #ffb703;
+        }
+
+        /* 星の横に表示される文字（常に見える状態にしています） */
+        .star-label {
+            position: absolute;
+            font-size: 13px;
+            font-family: 'WapuroMincho', serif;
+            color: #ffffff;
+            white-space: nowrap;
+            top: -6px;
+            left: 22px; /* 星の右側に文字が並ぶように調整 */
+            text-decoration: underline; /* リンクだとわかりやすく線をつけています */
+        }
+        
+        .star-link:hover .star-label {
+            color: #ffb703;
+        }
+
+        /* 📍 しし座の形になるように4つのリンクを厳選配置 */
+        /* 1. 短歌（頭の星・ラサラス付近） */
+        .tanka { top: 40px; left: 80px; }
+        
+        /* 2. カタログ（心臓の主星・レグルス：一番大きく光る） */
+        .catalog { 
+            top: 160px; 
+            left: 60px; 
+            width: 16px; 
+            height: 16px; 
+            box-shadow: 0 0 12px #ffffff, 0 0 20px #ffb703;
+        }
+        
+        /* 3. アーカイブ（背中の星・ゾスマ付近） */
+        .archive { top: 90px; left: 170px; }
+        
+        /* 4. X / Twitter（お尻の星・デネボラ） */
+        .twitter { top: 110px; left: 250px; }
+
     </style>
 </head>
 <body>
 
     <h1>トイカケ企画</h1>
-    
     <p>夏生まれ獅子座のふたり組ユニット</p>
-    <p>短歌</p>
-    <p>アーカイブ</p>
     
-    <div class="links">
-        <a href="https://x.com/あなたのユーザー名" target="_blank">X (Twitter)</a>
-        <a href="https://c.bunfree.net/c/sapporo11" target="_blank">文学フリマWebカタログ</a>
+    <!-- 💡しし座の形をしたリンクエリア -->
+    <div class="constellation-container">
+        
+        <!-- ① 短歌 -->
+        <a href="#" class="star-link tanka" title="短歌">
+            <span class="star-label">短歌</span>
+        </a>
+
+        <!-- ② 文学フリマWebカタログ（主星レグルス） -->
+        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-link catalog" title="文学フリマWebカタログ">
+            <span class="star-label" style="font-weight: bold;">文学フリマWebカタログ</span>
+        </a>
+
+        <!-- ③ アーカイブ -->
+        <a href="#" class="star-link archive" title="アーカイブ">
+            <span class="star-label">アーカイブ</span>
+        </a>
+
+        <!-- ④ X (Twitter) ※「あなたのユーザー名」の部分をアカウント名に変えてください -->
+        <a href="https://x.com/あなたのユーザー名" target="_blank" class="star-link twitter" title="X (Twitter)">
+            <span class="star-label">X (Twitter)</span>
+        </a>
+
     </div>
+
+    <p style="font-size: 14px; color: #8d99ae; margin-top: 40px;">※星や文字をクリックするとリンク先に飛びます。</p>
 
 </body>
 </html>
