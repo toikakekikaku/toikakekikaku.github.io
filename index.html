@@ -16,8 +16,8 @@
             max-width: 600px;
             margin: 50px auto;
             padding: 0 20px;
-            background-color: #ffffff; /* 背景は白 */
-            color: #333333;            /* 文字は暗いグレー */
+            background-color: #ffffff;
+            color: #333333;
             text-align: center;
             line-height: 1.8;
         }
@@ -31,19 +31,18 @@
         
         p { font-size: 16px; margin-bottom: 20px; color: #444444; }
 
-        /* 🌟 しし座を描くエリア */
+        /* 🌟 しし座を描くエリア（背景の枠と色を完全に消去） */
         .constellation-container {
             position: relative;
             width: 100%;
             max-width: 400px;
             height: 340px;
             margin: 30px auto;
-            background-color: #fafafa; /* ほんのり明るいグレーのボックス */
-            border: 1px solid #eeeeee;
-            border-radius: 12px;
+            background-color: transparent; /* 👈 背景を透明に */
+            border: none;                  /* 👈 枠線を消去 */
         }
 
-        /* 🗺️ SVGによる星座線（細かく繊細な黒い点線） */
+        /* 🗺️ SVGによる星座線 */
         .constellation-lines {
             position: absolute;
             top: 0;
@@ -53,21 +52,23 @@
             pointer-events: none;
         }
         .constellation-lines line {
-            stroke: #999999;       /* 線の色はグレー */
+            stroke: #b1b1b1;       /* 線の色は少し淡いグレーにして上品に */
             stroke-width: 1px;
-            stroke-dasharray: 1 2; /* 細かいドットの点線 */
+            stroke-dasharray: 1 3; /* 👈 さらに細かく、サラサラした極小ドットに */
         }
 
-        /* ✨ 星の共通デザイン（サイズは小さめ） */
+        /* ✨ 星の共通デザイン */
         .star-link {
             position: absolute;
             width: 6px;
             height: 6px;
-            background-color: #333333; /* 星の色は黒（暗いグレー） */
+            background-color: #333333;
             border-radius: 50%;
             display: block;
             text-decoration: none;
-            box-shadow: 0 0 4px rgba(0,0,0,0.1);
+            /* ズレ防止：星の中心（3px分）を基準点にする設定 */
+            margin-top: -3px;
+            margin-left: -3px;
             transition: transform 0.2s, background-color 0.2s;
             z-index: 10;
         }
@@ -75,10 +76,10 @@
         /* 星にマウスを乗せた（タップした）ときの効果 */
         .star-link:hover {
             transform: scale(1.6);
-            background-color: #000000; /* ホバーで真っ黒に */
+            background-color: #000000;
         }
 
-        /* 🏷️ 星のラベル（ホバー時に綺麗に浮かび上がるワープロ明朝） */
+        /* 🏷️ 星のラベル */
         .star-label {
             position: absolute;
             font-size: 11px;
@@ -88,7 +89,7 @@
             top: -26px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.85); /* ラベルの背景は黒 */
+            background-color: rgba(0, 0, 0, 0.85);
             padding: 2px 6px;
             border-radius: 4px;
             opacity: 0;
@@ -101,19 +102,19 @@
             visibility: visible;
         }
 
-        /* 📍 画像を基に割り出したしし座の正確な星配置（％指定） */
-        .lambda_nose   { top: 24%; left: 88%; } /* 鼻先 λ */
-        .mu_head       { top: 16%; left: 74%; } /* 頭 μ */
-        .epsilon_eye   { top: 23%; left: 79%; } /* 目 ε */
-        .zeta_adhafera { top: 24%; left: 61%; } /* 短歌（アダフェラ ζ） */
-        .gamma_algieba { top: 34%; left: 61%; } /* 星C（アルギエバ γ） */
-        .eta_neck      { top: 42%; left: 68%; } /* たてがみ η */
-        /* レグルス（一番輝く主星：ここだけ少し大きめの9px） */
-        .alpha_regulus { top: 54%; left: 68%; width: 9px; height: 9px; } 
-        .rho_frontfoot { top: 61%; left: 56%; } /* 前足 ρ */
-        .theta_chertan { top: 45%; left: 28%; } /* アーカイブ（シェルタン θ） */
-        .delta_zosma   { top: 31%; left: 28%; } /* 星E（ゾスマ δ） */
-        .beta_denebola { top: 45%; left: 7%;  } /* X（デネボラ β） */
+        /* 📍 しし座の星の正確な中心座標（％指定） */
+        .lambda_nose   { top: 24%; left: 88%; }
+        .epsilon_eye   { top: 23%; left: 79%; }
+        .mu_head       { top: 16%; left: 74%; }
+        .zeta_adhafera { top: 24%; left: 61%; }
+        .gamma_algieba { top: 34%; left: 61%; }
+        .eta_neck      { top: 42%; left: 68%; }
+        /* レグルスだけサイズが違う（9px）のでズレ補正を上書き */
+        .alpha_regulus { top: 54%; left: 68%; width: 9px; height: 9px; margin-top: -4.5px; margin-left: -4.5px; } 
+        .rho_frontfoot { top: 61%; left: 56%; }
+        .theta_chertan { top: 45%; left: 28%; }
+        .delta_zosma   { top: 31%; left: 28%; }
+        .beta_denebola { top: 45%; left: 7%;  }
 
     </style>
 </head>
@@ -125,7 +126,21 @@
     <div class="constellation-container">
         
         <svg class="constellation-lines" viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%;">
-            <line x1="88" y1="24" x2="79" y2="23" /> <line x1="79" y1="23" x2="74" y2="16" /> <line x1="74" y1="16" x2="61" y2="24" /> <line x1="61" y1="24" x2="61" y2="34" /> <line x1="61" y1="34" x2="68" y2="42" /> <line x1="68" y1="42" x2="68" y2="54" /> <line x1="68" y1="54" x2="56" y2="61" /> <line x1="56" y1="61" x2="28" y2="45" /> <line x1="61" y1="34" x2="28" y2="31" /> <line x1="28" y1="31" x2="28" y2="45" /> <line x1="28" y1="31" x2="7"  y2="45" /> <line x1="28" y1="45" x2="7"  y2="45" /> </svg>
+            <line x1="88" y1="24" x2="79" y2="23" />
+            <line x1="79" y1="23" x2="74" y2="16" />
+            <line x1="74" y1="16" x2="61" y2="24" />
+            <line x1="61" y1="24" x2="61" y2="34" />
+            <line x1="61" y1="34" x2="68" y2="42" />
+            <line x1="68" y1="42" x2="68" y2="54" />
+            
+            <line x1="68" y1="54" x2="56" y2="61" />
+            <line x1="56" y1="61" x2="28" y2="45" />
+
+            <line x1="61" y1="34" x2="28" y2="31" />
+            <line x1="28" y1="31" x2="28" y2="45" />
+            <line x1="28" y1="31" x2="7"  y2="45" />
+            <line x1="28" y1="45" x2="7"  y2="45" />
+        </svg>
         
         <a href="javascript:void(0)" class="star-link lambda_nose"><span class="star-label">星A</span></a>
         <a href="javascript:void(0)" class="star-link epsilon_eye"><span class="star-label">星B</span></a>
@@ -156,7 +171,7 @@
 
     </div>
 
-    <p style="font-size: 13px; color: #666666; margin-top: 20px;">※星に触れるとリンク名が浮かび上がります。</p>
+    <p style="font-size: 13px; color: #888888; margin-top: 20px;">※星に触れるとリンク名が浮かび上がります。</p>
 
 </body>
 </html>
