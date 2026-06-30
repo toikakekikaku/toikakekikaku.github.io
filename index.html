@@ -35,7 +35,7 @@
         .constellation-container {
             position: relative;
             width: 360px;
-            height: 340px; 
+            height: 320px; 
             margin: 40px auto;
             background-color: transparent;
             border: none;
@@ -109,19 +109,19 @@
             transform: translate(-50%, -50%) rotate(45deg);
         }
 
-        /* 📍 星座図から算出したリアルな位置座標 */
-        .lambda_nose   { top: 100px; left: 325px; } /* お知らせ（λ） */
-        .epsilon_eye   { top: 96px;  left: 285px; } /* 名前なし（ε） */
-        .mu_head       { top: 60px;  left: 260px; } /* Bluesky（μ） */
-        .zeta_adhafera { top: 96px;  left: 205px; } /* 短歌（ζ） */
+        /* 📍 比較スクショを元に再調整したピクセル座標 */
+        .lambda_nose   { top: 95px;  left: 335px; } /* お知らせ（λ：位置を上に修正） */
+        .epsilon_eye   { top: 90px;  left: 285px; } /* 名前なし（ε：位置を上に修正） */
+        .mu_head       { top: 55px;  left: 260px; } /* Bluesky（μ） */
+        .zeta_adhafera { top: 110px; left: 205px; } /* 短歌（ζ：位置を少し下げて大鎌のカーブを表現） */
         
-        /* 文学フリマ福岡（α:レグルス）高さを大幅に上げて底辺ラインを綺麗に */
-        .alpha_regulus { top: 205px; left: 235px; } 
+        /* 文学フリマ福岡（α:レグルス） */
+        .alpha_regulus { top: 195px; left: 245px; } 
         .alpha_regulus .star-shape { width: 7px; height: 7px; background-color: #444444; }
         .alpha_regulus:hover .star-shape { background-color: #000000; }
         
-        .theta_chertan { top: 180px; left: 110px; } /* アーカイブ（θ） */
-        .delta_zosma   { top: 125px; left: 115px; } /* 名前なし（δ） */
+        .theta_chertan { top: 185px; left: 125px; } /* アーカイブ（θ） */
+        .delta_zosma   { top: 140px; left: 125px; } /* 名前なし（δ：位置を少し下げてなだらかに） */
         
         .beta_denebola { top: 185px; left: 25px;  } /* フォーム（β） */
         .beta_denebola .star-label { margin-left: 10px; } 
@@ -143,12 +143,12 @@
 <body>
 
     <h1>トイカケ企画</h1>
-    <p>夏生まれ獅子座 of ふたり組ユニット</p>
+    <p>夏生まれ獅子座のふたり組ユニット</p>
     
     <div class="constellation-container">
         
-        <svg class="constellation-lines" width="360" height="340">
-            <line x1="325" y1="100" x2="285" y2="96" />  <line x1="285" y1="96"  x2="260" y2="60" />  <line x1="260" y1="60"  x2="205" y2="96" />  <line x1="205" y1="96"  x2="235" y2="205" /> <line x1="235" y1="205" x2="110" y2="180" /> <line x1="110" y1="180" x2="25"  y2="185" /> <line x1="205" y1="96"  x2="115" y2="125" /> <line x1="115" y1="125" x2="110" y2="180" /> <line x1="115" y1="125" x2="25"  y2="185" /> </svg>
+        <svg class="constellation-lines" width="360" height="320">
+            <line x1="335" y1="95"  x2="285" y2="90" />  <line x1="285" y1="90"  x2="260" y2="55" />  <line x1="260" y1="55"  x2="205" y2="110" /> <line x1="205" y1="110" x2="245" y2="195" /> <line x1="245" y1="195" x2="125" y2="185" /> <line x1="125" y1="185" x2="25"  y2="185" /> <line x1="205" y1="110" x2="125" y2="140" /> <line x1="125" y1="140" x2="125" y2="185" /> <line x1="125" y1="140" x2="25"  y2="185" /> </svg>
         
         <a href="javascript:void(0)" class="star-box lambda_nose">
             <div class="star-shape"></div>
@@ -180,7 +180,7 @@
             <span class="star-label">フォーム</span>
         </a>
 
-        <div class="star-dot" style="top: 96px; left: 285px;"></div>  <div class="star-dot" style="top: 125px; left: 115px;"></div> </div>
+        <div class="star-dot" style="top: 90px; left: 285px;"></div>  <div class="star-dot" style="top: 140px; left: 125px;"></div> </div>
 
     <div class="counter-area">
         今日:<span id="count-today">0</span>
