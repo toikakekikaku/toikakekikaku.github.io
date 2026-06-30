@@ -31,18 +31,17 @@
         
         p { font-size: 16px; margin-bottom: 20px; color: #444444; }
 
-        /* 🌟 しし座を描くエリア（枠なし・透明） */
+        /* 🌟 しし座を描くエリア（高さを確実に固定して真っ白を防止） */
         .constellation-container {
             position: relative;
-            width: 100%;
-            max-width: 400px;
-            height: 360px; /* 文字を下に常時出すため高さを少し広げました */
+            width: 360px;  /* 横幅を固定 */
+            height: 360px; /* 高さを固定 */
             margin: 30px auto;
             background-color: transparent;
             border: none;
         }
 
-        /* 🗺️ SVGによる星座線（細い直線に変更） */
+        /* 🗺️ SVGによる星座線（細い直線） */
         .constellation-lines {
             position: absolute;
             top: 0;
@@ -52,7 +51,7 @@
             pointer-events: none;
         }
         .constellation-lines line {
-            stroke: #cccccc;  /* 👈 上品で細い直線のグレー */
+            stroke: #cccccc;
             stroke-width: 1px;
         }
 
@@ -77,14 +76,14 @@
             font-family: 'WapuroMincho', serif;
             color: #555555;
             white-space: nowrap;
-            top: 10px; /* 👈 星のすこし下に配置 */
+            top: 10px; /* 星の10px下に表示 */
             left: 50%;
             transform: translateX(-50%);
-            text-decoration: underline; /* リンクと分かりやすいように下線 */
+            text-decoration: underline;
             transition: color 0.2s;
         }
         
-        /* 星や文字にマウスが乗ったとき、少し濃くなる効果 */
+        /* ホバー効果 */
         .star-link:hover {
             background-color: #000000;
         }
@@ -93,23 +92,23 @@
             font-weight: bold;
         }
 
-        /* 📍 しし座の星の正確な中心座標（％指定） */
-        .lambda_nose   { top: 24%; left: 88%; }
-        .epsilon_eye   { top: 23%; left: 79%; }
-        .mu_head       { top: 16%; left: 74%; }
-        .zeta_adhafera { top: 24%; left: 61%; }
-        .gamma_algieba { top: 34%; left: 61%; }
-        .eta_neck      { top: 42%; left: 68%; }
-        /* レグルス（主星：ここだけ9px） */
-        .alpha_regulus { top: 54%; left: 68%; width: 9px; height: 9px; margin-top: -4.5px; margin-left: -4.5px; } 
-        .rho_frontfoot { top: 61%; left: 56%; }
-        .theta_chertan { top: 45%; left: 28%; }
-        .delta_zosma   { top: 31%; left: 28%; }
-        .beta_denebola { top: 45%; left: 7%;  }
+        /* 📍 しし座の正確なピクセル座標（画像から完全固定値で算出） */
+        .lambda_nose   { top: 86px;  left: 316px; }
+        .epsilon_eye   { top: 82px;  left: 284px; }
+        .mu_head       { top: 57px;  left: 266px; }
+        .zeta_adhafera { top: 86px;  left: 219px; }
+        .gamma_algieba { top: 122px; left: 219px; }
+        .eta_neck      { top: 151px; left: 244px; }
+        /* レグルス（ここだけ9pxサイズ用に中心ズレ補正） */
+        .alpha_regulus { top: 194px; left: 244px; width: 9px; height: 9px; margin-top: -4.5px; margin-left: -4.5px; } 
+        .rho_frontfoot { top: 219px; left: 201px; }
+        .theta_chertan { top: 162px; left: 100px; }
+        .delta_zosma   { top: 111px; left: 100px; }
+        .beta_denebola { top: 162px; left: 25px;  }
 
-        /* ⚠️ カタログとXは文字が長いため、重なりを防ぐ位置微調整 */
+        /* ⚠️ 文字が長くて重なりそうな部分の位置微調整 */
         .alpha_regulus .star-label { top: 12px; }
-        .beta_denebola .star-label { top: 10px; left: 0%; transform: translateX(0); } /* 左端で見切れないよう調整 */
+        .beta_denebola .star-label { top: 12px; left: 15px; transform: none; } /* カタログ名が左に見切れないように */
 
     </style>
 </head>
@@ -117,3 +116,39 @@
 
     <h1>トイカケ企画</h1>
     <p>夏生まれ獅子座のふたり組ユニット</p>
+    
+    <div class="constellation-container">
+        
+        <svg class="constellation-lines" width="360" height="360">
+            <line x1="316" y1="86"  x2="284" y2="82" />
+            <line x1="284" y1="82"  x2="266" y2="57" />
+            <line x1="266" y1="57"  x2="219" y2="86" />
+            <line x1="219" y1="86"  x2="219" y2="122" />
+            <line x1="219" y1="122" x2="244" y2="151" />
+            <line x1="244" y1="151" x2="244" y2="194" />
+            
+            <line x1="244" y1="194" x2="201" y2="219" />
+            <line x1="201" y1="219" x2="100" y2="162" />
+
+            <line x1="219" y1="122" x2="100" y2="111" />
+            <line x1="100" y1="111" x2="100" y2="162" />
+            <line x1="100" y1="111" x2="25"  y2="162" />
+            <line x1="100" y1="162" x2="25"  y2="162" />
+        </svg>
+        
+        <a href="javascript:void(0)" class="star-link lambda_nose"><span class="star-label">星A</span></a>
+        <a href="javascript:void(0)" class="star-link epsilon_eye"><span class="star-label">星B</span></a>
+        <a href="javascript:void(0)" class="star-link mu_head"><span class="star-label">星C</span></a>
+        
+        <a href="javascript:void(0)" class="star-link zeta_adhafera" title="短歌">
+            <span class="star-label">短歌</span>
+        </a>
+
+        <a href="javascript:void(0)" class="star-link gamma_algieba"><span class="star-label">星D</span></a>
+        <a href="javascript:void(0)" class="star-link eta_neck"><span class="star-label">星E</span></a>
+
+        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-link alpha_regulus" title="文学フリマWebカタログ">
+            <span class="star-label" style="font-weight: bold;">文学フリマWebカタログ</span>
+        </a>
+
+        <a href="javascript:void(0)" class="star-link rho_frontfoot"><span class="
