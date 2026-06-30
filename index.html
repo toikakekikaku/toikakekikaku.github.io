@@ -66,24 +66,23 @@
             transform: translate(-50%, -2px); 
         }
 
-        /* ✨ 星の形（✦）初期状態は少し優しいグレー */
+        /* ✨ 星の形（✦）初期状態 */
         .star-shape {
             width: 4px;
             height: 4px;
-            background-color: #666666; /* 👈 初期状態の星の色 */
+            background-color: #666666; 
             clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
             transform: rotate(45deg);
-            /* 👈 色（background-color）と回転（transform）の両方を0.4秒かけて滑らかに変えます */
             transition: transform 0.4s ease, background-color 0.4s ease;
         }
 
-        /* 🔄 カーソルを合わせたとき：星の色が真っ黒に変わって、225度まで回転する */
+        /* 🔄 カーソルを合わせたとき効果 */
         .star-box:hover .star-shape {
-            background-color: #000000; /* 👈 カーソルが乗ったときの星の色 */
-            transform: rotate(225deg) scale(1.5); /* 👈 回転して少し大きくなる */
+            background-color: #000000; 
+            transform: rotate(225deg) scale(1.5); 
         }
 
-        /* 🏷️ 星の真下のラベル（カーソルを合わせなくても最初からずっと表示） */
+        /* 🏷️ 星の真下のラベル */
         .star-label {
             font-size: 11px;
             font-family: 'WapuroMincho', serif;
@@ -94,7 +93,6 @@
             transition: color 0.2s;
         }
         
-        /* カーソルを合わせたときは文字の色も真っ黒に */
         .star-box:hover .star-label {
             color: #000000;
             font-weight: bold;
@@ -111,26 +109,34 @@
             transform: translate(-50%, -50%) rotate(45deg);
         }
 
-        /* 📍 しし座の正確なピクセル座標 */
+        /* 📍 修正後のしし座ピクセル座標 */
         .lambda_nose   { top: 86px;  left: 316px; } /* お知らせ */
-        .epsilon_eye   { top: 82px;  left: 284px; } 
+        .epsilon_eye   { top: 82px;  left: 284px; } /* 名前なし（頭） */
         .mu_head       { top: 57px;  left: 266px; } /* Bluesky */
         .zeta_adhafera { top: 86px;  left: 219px; } /* 短歌 */
-        .gamma_algieba { top: 122px; left: 219px; } 
-        .eta_neck      { top: 151px; left: 244px; } 
         
-        /* 文学フリマ福岡（ここだけ星の初期サイズを少し大きめの7pxに） */
+        /* 文学フリマ福岡（底辺の右端：少し大きめの星型 7px） */
         .alpha_regulus { top: 194px; left: 244px; } 
         .alpha_regulus .star-shape { width: 7px; height: 7px; background-color: #444444; }
         .alpha_regulus:hover .star-shape { background-color: #000000; }
         
-        .rho_frontfoot { top: 219px; left: 201px; } 
-        .theta_chertan { top: 162px; left: 100px; } /* アーカイブ */
-        .delta_zosma   { top: 111px; left: 100px; } 
+        .theta_chertan { top: 162px; left: 130px; } /* アーカイブ（底辺の中央：位置を少し右寄りに調整） */
+        .delta_zosma   { top: 111px; left: 130px; } /* 名前なし（背中：アーカイブの真上） */
         
-        /* フォーム（端で見切れないように文字位置を微調整） */
-        .beta_denebola { top: 162px; left: 25px; } 
+        .beta_denebola { top: 162px; left: 25px;  } /* フォーム（底辺の左端） */
         .beta_denebola .star-label { margin-left: 15px; } 
+
+        /* 📊 カウンター専用のスタイル */
+        .counter-area {
+            font-size: 12px;
+            color: #777777;
+            margin-top: 30px;
+            letter-spacing: 0.05em;
+        }
+        .counter-area span {
+            margin: 0 8px;
+            font-family: monospace; /* 数字を等幅にして見やすく */
+        }
 
     </style>
 </head>
@@ -142,21 +148,7 @@
     <div class="constellation-container">
         
         <svg class="constellation-lines" width="360" height="360">
-            <line x1="316" y1="86"  x2="284" y2="82" />
-            <line x1="284" y1="82"  x2="266" y2="57" />
-            <line x1="266" y1="57"  x2="219" y2="86" />
-            <line x1="219" y1="86"  x2="219" y2="122" />
-            <line x1="219" y1="122" x2="244" y2="151" />
-            <line x1="244" y1="151" x2="244" y2="194" />
-            
-            <line x1="244" y1="194" x2="201" y2="219" />
-            <line x1="201" y1="219" x2="100" y2="162" />
-
-            <line x1="219" y1="122" x2="100" y2="111" />
-            <line x1="100" y1="111" x2="100" y2="162" />
-            <line x1="100" y1="111" x2="25"  y2="162" />
-            <line x1="100" y1="162" x2="25"  y2="162" />
-        </svg>
+            <line x1="316" y1="86"  x2="284" y2="82" /> <line x1="284" y1="82"  x2="266" y2="57" /> <line x1="266" y1="57"  x2="219" y2="86" /> <line x1="219" y1="86"  x2="244" y2="194" /> <line x1="244" y1="194" x2="130" y2="162" /> <line x1="130" y1="162" x2="25"  y2="162" /> <line x1="219" y1="86"  x2="130" y2="111" /> <line x1="130" y1="111" x2="130" y2="162" /> <line x1="130" y1="111" x2="25"  y2="162" /> </svg>
         
         <a href="javascript:void(0)" class="star-box lambda_nose">
             <div class="star-shape"></div>
@@ -188,15 +180,21 @@
             <span class="star-label">フォーム</span>
         </a>
 
-        <div class="star-dot" style="top: 82px; left: 284px;"></div>  
-        <div class="star-dot" style="top: 122px; left: 219px;"></div> 
-        <div class="star-dot" style="top: 151px; left: 244px;"></div> 
-        <div class="star-dot" style="top: 219px; left: 201px;"></div> 
-        <div class="star-dot" style="top: 111px; left: 100px;"></div> 
+        <div class="star-dot" style="top: 82px; left: 284px;"></div>  <div class="star-dot" style="top: 111px; left: 130px;"></div> </div>
 
+    <div class="counter-area">
+        今日:<span id="count-today">0</span>
+        昨日:<span id="count-yesterday">0</span>
+        合計:<span id="count-total">0</span>
     </div>
 
-    <p style="font-size: 13px; color: #888888; margin-top: 20px;">※星や文字をクリックするとリンク先にジャンプします。</p>
-
-</body>
-</html>
+    <script>
+        (function() {
+            const now = new Date();
+            const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+            
+            // ローカルストレージからデータを取得
+            let lastDate = localStorage.getItem('counter_last_date');
+            let todayCount = parseInt(localStorage.getItem('counter_today') || '0', 10);
+            let yesterCount = parseInt(localStorage.getItem('counter_yesterday') || '0', 10);
+            let totalCount = parseInt(localStorage.
