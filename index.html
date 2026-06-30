@@ -10,7 +10,6 @@
             src: url('https://irori.github.io/wapuro-mincho/wapuro-mincho.woff2') format('woff2');
         }
         
-        /* ⚪ 白黒ベースのシンプルな背景と文字 */
         body {
             font-family: 'WapuroMincho', serif;
             max-width: 600px;
@@ -38,7 +37,6 @@
             height: 420px; 
             margin: 40px auto;
             background-color: transparent;
-            border: none;
         }
 
         /* 🗺️ SVGによる星座線（細い直線） */
@@ -49,7 +47,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1; /* 線のレイヤーを正しく配置 */
+            z-index: 1;
         }
         .constellation-lines line {
             stroke: #cccccc;
@@ -104,7 +102,7 @@
             font-weight: bold;
         }
 
-        /* 📍 復活！形を整えるためだけの名前なしの可愛い星 */
+        /* 📍 形を整えるためだけの名前なしの可愛い灰色の星 */
         .star-dot {
             position: absolute;
             width: 5px;
@@ -115,23 +113,23 @@
             transform: translate(-50%, -50%) rotate(45deg);
         }
 
-        /* 📍 比率を完全に計算し直した、しし座の絶対座標 */
-        .lambda_nose   { top: 105px; left: 345px; } /* お知らせ（λ） */
-        .mu_head       { top: 55px;  left: 265px; } /* Bluesky（μ） */
-        .zeta_adhafera { top: 112px; left: 205px; } /* 短歌（ζ） */
+        /* 📍 しし座の絶対座標設定 */
+        .lambda_nose   { top: 105px; left: 345px; } /* お知らせ */
+        .mu_head       { top: 55px;  left: 265px; } /* Bluesky */
+        .zeta_adhafera { top: 112px; left: 205px; } /* 短歌 */
         
-        /* 文学フリマ福岡（α:レグルス） */
+        /* 文学フリマ福岡（レグルス） */
         .alpha_regulus { top: 220px; left: 265px; } 
         .alpha_regulus .star-shape { width: 7px; height: 7px; background-color: #444444; }
         
-        .theta_chertan { top: 180px; left: 115px; } /* アーカイブ（θ） */
-        .beta_denebola { top: 185px; left: 25px;  } /* フォーム（β） */
+        .theta_chertan { top: 180px; left: 115px; } /* アーカイブ */
+        .beta_denebola { top: 185px; left: 25px;  } /* フォーム */
 
-        /* 各リンク足の座標 */
-        .star_sigma    { top: 300px; left: 95px;  } /* 日記（σ：左足先） */
-        .star_rho      { top: 260px; left: 190px; } /* Twitter（ρ：前足関節） */
+        /* 各足の座標 */
+        .star_sigma    { top: 300px; left: 95px;  } /* 日記 */
+        .star_rho      { top: 260px; left: 190px; } /* Twitter */
 
-        /* ⚠️ 文字位置の微調整 */
+        /* 文字位置の微調整 */
         .beta_denebola .star-label { margin-left: 10px; } 
         .star_rho .star-label { margin-left: 25px; } 
 
@@ -155,7 +153,7 @@
     
     <div class="constellation-container">
         
-        <svg class="constellation-lines" width="360" height="420">
+        <svg class="constellation-lines">
             <line x1="345" y1="105" x2="295" y2="92"  />  <line x1="295" y1="92"  x2="265" y2="55"  />  <line x1="265" y1="55"  x2="205" y2="112" />  <line x1="205" y1="112" x2="220" y2="155" />  <line x1="220" y1="155" x2="265" y2="185" />  <line x1="265" y1="185" x2="265" y2="220" />  <line x1="205" y1="112" x2="120" y2="125" />  <line x1="120" y1="125" x2="25"  y2="185" />  <line x1="120" y1="125" x2="115" y2="180" />  <line x1="25"  y1="185" x2="115" y2="180" />  <line x1="115" y1="180" x2="190" y2="260" />  <line x1="190" y1="260" x2="265" y2="220" />  <line x1="115" y1="180" x2="90"  y2="240" />  <line x1="90"  y2="240" x2="95"  y2="300" />  <line x1="265" y1="220" x2="345" y2="240" />  </svg>
         
         <a href="javascript:void(0)" class="star-box lambda_nose">
