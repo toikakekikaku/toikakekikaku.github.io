@@ -197,4 +197,48 @@
             let lastDate = localStorage.getItem('counter_last_date');
             let todayCount = parseInt(localStorage.getItem('counter_today') || '0', 10);
             let yesterCount = parseInt(localStorage.getItem('counter_yesterday') || '0', 10);
-            let totalCount = parseInt(localStorage.
+            let totalCount = parseInt(localStorage.getItem('counter_total') || '0', 10);
+
+            // 初回訪問時などの初期化
+            if (!lastDate) {
+                todayCount = 1;
+                yesterCount = 0;
+                totalCount = 1;
+                localStorage.setItem('counter_last_date', todayStr);
+            } else if (lastDate !== todayStr) {
+                // 日付が変わった場合の処理
+                // 前日が本当に昨日（1日前）かどうかチェック
+                const lastParts = lastDate.split('-').map(Number);
+                const lastDateObj = new Date(lastParts[0], lastParts[1] - 1, lastParts[2]);
+                const diffTime = Math.abs(now - lastDateObj);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 1) {
+                    yesterCount = todayCount; // 昨日のカウントにスライド
+                } else {
+                    yesterCount = 0; // 2日以上空いていた場合は昨日は0
+                }
+                
+                todayCount = 1; // 本日は1からスタート
+                totalCount += 1;
+                localStorage.setItem('counter_last_date', todayStr);
+            } else {
+                // 同一日のアクセス
+                todayCount += 1;
+                totalCount += 1;
+            }
+
+            // データを保存
+            localStorage.setItem('counter_today', todayCount);
+            localStorage.setItem('counter_yesterday', yesterCount);
+            localStorage.setItem('counter_total', totalCount);
+
+            // 画面に数値を反映
+            document.getElementById('count-today').textContent = todayCount;
+            document.getElementById('count-yesterday').textContent = yesterCount;
+            document.getElementById('count-total').textContent = totalCount;
+        })();
+    </script>
+
+</body>
+</html>
