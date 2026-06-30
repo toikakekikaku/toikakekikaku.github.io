@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PL8ZGB2DYS');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>トイカケ企画</title>
@@ -179,7 +187,7 @@
             <span class="star-label">短歌</span>
         </a>
 
-        <a href="https://c.bunfree.net/c/sapporo11" target="_blank" class="star-box alpha_regulus">
+        <a href="https://bunfree.net/event/fukuoka12/" target="_blank" class="star-box alpha_regulus">
             <div class="star-shape"></div>
             <span class="star-label" style="font-weight: bold;">文学フリマ福岡</span>
         </a>
@@ -206,47 +214,8 @@
 
         <div class="star-dot" style="top: 92px;  left: 295px;"></div> <div class="star-dot" style="top: 155px; left: 220px;"></div> <div class="star-dot" style="top: 185px; left: 265px;"></div> <div class="star-dot" style="top: 125px; left: 120px;"></div>  <div class="star-dot" style="top: 240px; left: 345px;"></div> </div>
 
-    <div class="counter-area">
-        今日:<span id="count-today">0</span>
-        昨日:<span id="count-yesterday">0</span>
-        合計:<span id="count-total">0</span>
-    </div>
+   
 
-    <script>
-        (function() {
-            const now = new Date();
-            const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-            
-            let lastDate = localStorage.getItem('counter_last_date');
-            let todayCount = parseInt(localStorage.getItem('counter_today') || '0', 10);
-            let yesterCount = parseInt(localStorage.getItem('counter_yesterday') || '0', 10);
-            let totalCount = parseInt(localStorage.getItem('counter_total') || '0', 10);
-
-            if (!lastDate) {
-                todayCount = 1; yesterCount = 0; totalCount = 1;
-                localStorage.setItem('counter_last_date', todayStr);
-            } else if (lastDate !== todayStr) {
-                const lastParts = lastDate.split('-').map(Number);
-                const lastDateObj = new Date(lastParts[0], lastParts[1] - 1, lastParts[2]);
-                const diffTime = Math.abs(now - lastDateObj);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-                if (diffDays === 1) { yesterCount = todayCount; } else { yesterCount = 0; }
-                todayCount = 1; totalCount += 1;
-                localStorage.setItem('counter_last_date', todayStr);
-            } else {
-                todayCount += 1; totalCount += 1;
-            }
-
-            localStorage.setItem('counter_today', todayCount);
-            localStorage.setItem('counter_yesterday', yesterCount);
-            localStorage.setItem('counter_total', totalCount);
-
-            document.getElementById('count-today').textContent = todayCount;
-            document.getElementById('count-yesterday').textContent = yesterCount;
-            document.getElementById('count-total').textContent = totalCount;
-        })();
-    </script>
-
+    
 </body>
 </html>
